@@ -4,7 +4,9 @@ const materials = document.getElementsByClassName('material');
 const detailedContents = document.getElementsByClassName('detailed-contents');
 const subjects = document.getElementsByClassName('subject');
 const main = document.querySelector('.main');
+const inputArticle = document.querySelector('.input-article');
 
+const formatArticleButton = document.querySelector('.format-article');
 const splitButton = document.querySelector('.split-sentence');
 const leftButton = document.querySelector('.left-importants');
 const arrangeButton = document.querySelector('.arrange-importants');
@@ -27,8 +29,8 @@ const formatArticle = (article) => {
     return article;
 };
 
-const leftImportantsOnly = () => {
-    main.style.color = 'white';
+const leftImportantsOnly = (articleElement) => {
+    articleElement.style.color = 'white';
 
     for (let i = 0; i < splits.length; i++) {
         splits[i].style.color = 'white';
@@ -115,14 +117,20 @@ const splitInterval = () => {
 //     }
 // };
 
-main.innerHTML = formatArticle(main.innerHTML);
+inputArticle.value = '';
+// main.innerHTML = formatArticle(main.innerHTML);
+
+formatArticleButton.addEventListener('click', () => {
+    // inputArticle.value = formatArticle(inputArticle.value);
+    main.innerHTML = formatArticle(inputArticle.value);
+});
 
 splitButton.addEventListener('click', () => {
     splitInterval();
 });
 
 leftButton.addEventListener('click', () => {
-    leftImportantsOnly();
+    leftImportantsOnly(main);
 });
 
 arrangeButton.addEventListener('click', () => {
